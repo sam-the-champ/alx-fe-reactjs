@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
@@ -9,6 +10,7 @@ import AddRecipeForm from './components/AddRecipeForm';
 import RecipeList from './components/RecipeList';
 import RecipeDetails from './components/RecipeDetails'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import SearchBar from './components/SearchBar';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -42,9 +44,11 @@ function App() {
       <nav>
         <Link to="/">Home</Link>
       </nav>
+      <SearchBar />
       <Routes>
         <Route path="/" element={<><AddRecipeForm /><RecipeList /></>} />
         <Route path="/recipe/:id" element={<RecipeDetails />} />
+        <Route path="/" element={<RecipeList />} />
       </Routes>
     </div>
       <p className="read-the-docs">
