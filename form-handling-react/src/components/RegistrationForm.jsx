@@ -1,53 +1,50 @@
 import React, { useState } from "react";
 
 const RegistrationForm = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: ""
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    console.log("Form submitted:", { username, email, password });
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label>Username:</label>
+      <label>
+        Username:
         <input 
           type="text" 
           name="username" 
-          value={formData.username} 
-          onChange={handleChange} 
+          value={username}  // Holds username state
+          onChange={(e) => setUsername(e.target.value)} 
           required 
         />
-      </div>
-      <div>
-        <label>Email:</label>
+      </label>
+
+      <label>
+        Email:
         <input 
           type="email" 
           name="email" 
-          value={formData.email} 
-          onChange={handleChange} 
+          value={email}  // Holds email state
+          onChange={(e) => setEmail(e.target.value)} 
           required 
         />
-      </div>
-      <div>
-        <label>Password:</label>
+      </label>
+
+      <label>
+        Password:
         <input 
           type="password" 
           name="password" 
-          value={formData.password} 
-          onChange={handleChange} 
+          value={password}  // Holds password state
+          onChange={(e) => setPassword(e.target.value)} 
           required 
         />
-      </div>
+      </label>
+
       <button type="submit">Register</button>
     </form>
   );
