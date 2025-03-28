@@ -1,22 +1,16 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-function TodoList() {
+const TodoList = () => {
   const [todos, setTodos] = useState([
     { id: 1, text: "Learn React", completed: false },
-    { id: 2, text: "Build a Project", completed: false },
+    { id: 2, text: "Build a project", completed: false }
   ]);
-  const [newTodo, setNewTodo] = useState("");
 
-  // Add a todo
-  const addTodo = (e) => {
-    e.preventDefault();
-    if (!newTodo.trim()) return;
-    setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
-    setNewTodo("");
+  const handleAddTodo = (text) => {
+    setTodos([...todos, { id: Date.now(), text, completed: false }]);
   };
 
-  // Toggle completed
-  const toggleTodo = (id) => {
+  const handleToggleTodo = (id) => {
     setTodos(
       todos.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
@@ -24,40 +18,33 @@ function TodoList() {
     );
   };
 
-  // Delete todo
-  const deleteTodo = (id) => {
+  const handleDeleteTodo = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   return (
     <div>
-      <h2>Todo List</h2>
-      <form onSubmit={addTodo}>
-        <input
-          type="text"
-          placeholder="Add a todo..."
-          value={newTodo}
-          onChange={(e) => setNewTodo(e.target.value)}
-        />
-        <button type="submit">Add</button>
-      </form>
+      <h1>Todo List</h1>
       <ul>
         {todos.map((todo) => (
           <li
             key={todo.id}
+            onClick={() => handleToggleTodo(todo.id)}
             style={{
               textDecoration: todo.completed ? "line-through" : "none",
-              cursor: "pointer",
+              cursor: "pointer"
             }}
-            onClick={() => toggleTodo(todo.id)}
           >
-            {todo.text}
-            <button onClick={() => deleteTodo(todo.id)}>❌</button>
+            {todo.text} <button onClick={() => handleDeleteTodo(todo.id)}>❌</button>
           </li>
         ))}
       </ul>
+      <input type="text" placeholder="Add a todo..." data-testid="todo-input" />
+      <button onClick={() => handleAddTodo("Test Todo")} data-testid="add-btn">
+        Add
+      </button>
     </div>
   );
-}
+};
 
 export default TodoList;
