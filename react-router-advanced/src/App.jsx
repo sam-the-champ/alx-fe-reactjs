@@ -10,6 +10,7 @@ import ProfileSettings from "./pages/ProfileSettings";
 import BlogPost from "./pages/BlogPost";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 function App() {
   const [count, setCount] = useState(0)
@@ -55,6 +56,13 @@ function App() {
       {/* Redirect unknown routes */}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
+      </Routes>
+    </BrowserRouter>
     </>
   )
 }
