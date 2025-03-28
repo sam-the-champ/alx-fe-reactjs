@@ -34,6 +34,4 @@ test("deletes a todo", () => {
   expect(screen.queryByText("Learn React")).not.toBeInTheDocument();
 });
 
-"scripts": {
-  "test": "jest"
-}
+
